@@ -1,23 +1,51 @@
-﻿const double PI = 3.14159;
-
-PrintCircleInfo(12);
-PrintCircleInfo(24);
-
-void PrintCircleInfo(int radius)
+﻿string[,] corporate =
 {
-    Console.WriteLine($"Circle with radius {radius}");
-    PrintCircleArea(radius);
-    PrintCircleCircumference(radius);
+    {"Robert", "Bavin"}, {"Simon", "Bright"},
+    {"Kim", "Sinclair"}, {"Aashrita", "Kamath"},
+    {"Sarah", "Delucchi"}, {"Sinan", "Ali"}
+};
+
+string[,] external =
+{
+    {"Vinnie", "Ashton"}, {"Cody", "Dysart"},
+    {"Shay", "Lawrence"}, {"Daren", "Valdes"}
+};
+
+string externalDomain = "hayworth.com",
+       corporateDomain = "contoso.com";
+
+ListEmployeeAddresses();
+Console.WriteLine();
+ListEmployeeAddresses(externalDomain);
+
+void ListEmployeeAddresses(string optionalDomain = "")
+{
+    ListInternalAddresses();
+
+    if (optionalDomain != "")
+        ListExternalAddresses();
 }
 
-void PrintCircleArea(int radius)
+void ListInternalAddresses()
 {
-    double area = PI * (radius * radius);
-    Console.WriteLine($"Area = {area}");
+    for (int i = 0; i < corporate.GetLength(0); i++)
+    {
+        // display internal email addresses
+        string firstLetters = corporate[i, 0].Remove(2),
+               lastName = corporate[i, 1];
+
+        Console.WriteLine($"{firstLetters.ToLower()}{lastName.ToLower()}@{corporateDomain}");
+    }
 }
 
-void PrintCircleCircumference(int radius)
+void ListExternalAddresses()
 {
-    double circumference = 2 * PI * radius;
-    Console.WriteLine($"Circumference = {circumference}");
+    for (int i = 0; i < external.GetLength(0); i++)
+    {
+        // display external email addresses
+        string firstLetters = external[i, 0].Remove(2),
+              lastName = external[i, 1];
+
+        Console.WriteLine($"{firstLetters.ToLower()}{lastName.ToLower()}@{externalDomain}");
+    }
 }
