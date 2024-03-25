@@ -28,24 +28,22 @@ void ListEmployeeAddresses(string optionalDomain = "")
 
 void ListInternalAddresses()
 {
-    for (int i = 0; i < corporate.GetLength(0); i++)
-    {
-        // display internal email addresses
-        string firstLetters = corporate[i, 0].Remove(2),
-               lastName = corporate[i, 1];
-
-        Console.WriteLine($"{firstLetters.ToLower()}{lastName.ToLower()}@{corporateDomain}");
-    }
+    ListEmails(corporate, corporateDomain);
 }
 
 void ListExternalAddresses()
 {
-    for (int i = 0; i < external.GetLength(0); i++)
-    {
-        // display external email addresses
-        string firstLetters = external[i, 0].Remove(2),
-              lastName = external[i, 1];
+    ListEmails(external, externalDomain);
+}
 
-        Console.WriteLine($"{firstLetters.ToLower()}{lastName.ToLower()}@{externalDomain}");
+void ListEmails(string[,] userList,string domainName)
+{
+    for (int i = 0; i < userList.GetLength(0); i++)
+    {
+        // display internal email addresses
+        string firstLetters = userList[i, 0].Remove(2),
+               lastName = userList[i, 1];
+
+        Console.WriteLine($"{firstLetters.ToLower()}{lastName.ToLower()}@{domainName}");
     }
 }
